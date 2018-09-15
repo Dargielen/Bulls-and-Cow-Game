@@ -4,15 +4,15 @@
 class FBullCowGame {
 public:
 	void Reset(); //make a more rich return value
-	int GetMaxTries();
+	int GetMaxTries() const;
 	int GetBulls();
 	int GetCows();
 	int GetScore();
 	bool isGameWon();
-	int GetCurrentTry();
+	int GetCurrentTry() const;
 	bool CheckGuessValidity(std::string);
 
 private:
-	int MyCurrentTry();
-	int MyMaxTries();
+	int MyCurrentTry = 1;
+	int MyMaxTries = 5;
 };

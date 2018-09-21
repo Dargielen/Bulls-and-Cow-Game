@@ -16,16 +16,18 @@ public:
 
 	FBullCowGame(); // constructor
 
-	void Reset(); //make a more rich return value
 	int32 GetMaxTries() const;
 	int32 GetCurrentTry() const;
-	bool isGameWon() const;
+	int32 GetHiddenWordLength() const;
 	// rethink methods to use
 	int32 GetBulls();
 	int32 GetCows();
 	int32 GetScore();
-	bool CheckGuessValidity(FString);
-	FBullCowCount SubmitGuess(FString Guess);
+
+	void Reset(); //make a more rich return value
+	bool isGameWon() const;
+	bool CheckGuessValidity(FString) const;
+	FBullCowCount SubmitGuess(FString);
 private:
 	int32 MyCurrentTry;
 	int32 MyMaxTries;

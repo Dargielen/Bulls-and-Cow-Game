@@ -36,7 +36,7 @@ public:
 	void Reset(); //make a more rich return value
 	bool isGameWon() const;
 	EGuessStatus CheckGuessValidity(FString) const;
-	FBullCowCount SubmitGuess(FString);
+	FBullCowCount SubmitValidGuess(FString);
 private:
 	int32 MyCurrentTry;
 	int32 MyMaxTries;

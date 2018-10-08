@@ -89,7 +89,7 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 			}
 		}
 	}
-	if (BullCowCount.Bulls == MyHiddenWord.length()) 
+	if (BullCowCount.Bulls == WordLength) 
 	{
 		bGameIsWon = true;
 	}

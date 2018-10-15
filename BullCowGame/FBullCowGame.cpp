@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "FBullCowGame.h"
+#include <string>
+#include <iostream>
 
 using FString = std::string;
 using int32 = int;
@@ -12,6 +14,7 @@ FBullCowGame::FBullCowGame()
 int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
+bool FBullCowGame::isGameWon() const { return bGameIsWon; }
 
 int32 FBullCowGame::GetBulls()
 {
@@ -29,7 +32,7 @@ int32 FBullCowGame::GetScore()
 }
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 8;
+	constexpr int32 MAX_TRIES = 4;
 	const FString HIDDEN_WORD = "ante";
 	MyCurrentTry = 1;
 	MyMaxTries = MAX_TRIES;
@@ -37,11 +40,6 @@ void FBullCowGame::Reset()
 	bGameIsWon = false;
 
 	return;
-}
-
-bool FBullCowGame::isGameWon() const
-{
-	return bGameIsWon;
 }
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
@@ -61,33 +59,34 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 	else
 	{
 		return EGuessStatus::OK;
-	}
-	
+	}	
 }
 // receives a VALID guess and increments turn, and returns count
 FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 {
-	MyCurrentTry++;
+	//MyCurrentTry++;
 	FBullCowCount BullCowCount;
 	int32 WordLength = MyHiddenWord.length(); // assuming same length as guess
-
-	// loop through all letters in the hidden word
-	for (int32 MHWChar = 0; MHWChar < WordLength; MHWChar++) 
-	{// compare letters against the guess
-		for (int32 GChar = 0; GChar < WordLength; GChar++) 
-		{// if they match then
-			if (Guess[GChar] == MyHiddenWord[MHWChar])
-			{// if they're in the same place
-				if (MHWChar == GChar) 
-				{	
-					BullCowCount.Bulls++;	// increment bulls
-				}
-				else 
-				{					
-					BullCowCount.Cows++;	// increment cows
+	if (MyCurrentTry <= MyMaxTries) {
+		// loop through all letters in the hidden word
+		for (int32 MHWChar = 0; MHWChar < WordLength; MHWChar++)
+		{// compare letters against the guess
+			for (int32 GChar = 0; GChar < WordLength; GChar++)
+			{// if they match then
+				if (Guess[GChar] == MyHiddenWord[MHWChar])
+				{// if they're in the same place
+					if (MHWChar == GChar)
+					{
+						BullCowCount.Bulls++;	// increment bulls
+					}
+					else
+					{
+						BullCowCount.Cows++;	// increment cows
+					}
 				}
 			}
 		}
+		MyCurrentTry++;
 	}
 	if (BullCowCount.Bulls == WordLength) 
 	{

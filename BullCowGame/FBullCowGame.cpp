@@ -36,6 +36,16 @@ bool FBullCowGame::IsIsogram(FString Word) const
 	return true;	// assume user can input something like this: /0
 }
 
+bool FBullCowGame::IsLowercase(FString Word) const
+{
+	for (auto Letter : Word) {
+		if (!islower(Letter)) {
+			return false;
+		}
+	}
+	return true;
+}
+
 int32 FBullCowGame::GetBulls()
 {
 	return 0;
@@ -68,9 +78,9 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 	{		
 			return EGuessStatus::Not_Isogram;
 	}
-	else if (false)
+	else if (!IsLowercase(Guess))
 	{
-		return EGuessStatus::Not_Lowercase; // TODO make a function
+		return EGuessStatus::Not_Lowercase;
 	}
 	else if (Guess.length() != GetHiddenWordLength())
 	{

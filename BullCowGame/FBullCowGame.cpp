@@ -12,10 +12,23 @@ FBullCowGame::FBullCowGame()
 	Reset();
 }
 
-int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
+
 bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
+
+int32 FBullCowGame::GetMaxTries() const
+{
+	TMap<int32, int32> WordLengthToMaxTries { {3,5}, {4,5}, {5,5}, {6,5} };
+	return WordLengthToMaxTries[MyHiddenWord.length()];
+}
+FString FBullCowGame::GuessWordLength(int32 MyWordLength)
+{
+	TMap<int32, FString> WordChosenFromLength { {3, "cat"}, { 4, "frog" }, { 5, "shirt" }, {6, "planet"}};
+	MyHiddenWord = WordChosenFromLength[MyWordLength];
+
+	return WordChosenFromLength[MyWordLength];
+}
 
 bool FBullCowGame::IsIsogram(FString Word) const
 {
@@ -46,27 +59,11 @@ bool FBullCowGame::IsLowercase(FString Word) const
 	return true;
 }
 
-int32 FBullCowGame::GetBulls()
-{
-	return 0;
-}
-
-int32 FBullCowGame::GetCows()
-{
-	return 0;
-}
-
-int32 FBullCowGame::GetScore()
-{
-	return 0;
-}
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 4;
-	const FString HIDDEN_WORD = "ante";
+	//const FString HIDDEN_WORD = "ante";
 	MyCurrentTry = 1;
-	MyMaxTries = MAX_TRIES;
-	MyHiddenWord = HIDDEN_WORD;
+	MyHiddenWord = "";
 	bGameIsWon = false;
 
 	return;
@@ -96,7 +93,7 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 {
 	FBullCowCount BullCowCount;
 	int32 WordLength = MyHiddenWord.length(); // assuming same length as guess
-	if (MyCurrentTry <= MyMaxTries) {
+	if (MyCurrentTry <= GetMaxTries()) {
 		// loop through all letters in the hidden word
 		for (int32 MHWChar = 0; MHWChar < WordLength; MHWChar++)
 		{// compare letters against the guess

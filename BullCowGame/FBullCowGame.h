@@ -31,15 +31,11 @@ public:
 	bool IsGameWon() const;
 	EGuessStatus CheckGuessValidity(FString) const;
 	FBullCowCount SubmitValidGuess(FString);
-	// rethink methods to use
-	int32 GetBulls();
-	int32 GetCows();
-	int32 GetScore();
+	FString GuessWordLength(int32);
 	void Reset(); //make a more rich return value
 	
 private:
 	int32 MyCurrentTry;
-	int32 MyMaxTries;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 	bool IsIsogram(FString) const;

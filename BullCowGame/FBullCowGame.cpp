@@ -22,12 +22,11 @@ int32 FBullCowGame::GetMaxTries() const
 	TMap<int32, int32> WordLengthToMaxTries { {3,5}, {4,5}, {5,5}, {6,5} };
 	return WordLengthToMaxTries[MyHiddenWord.length()];
 }
-FString FBullCowGame::GuessWordLength(int32 MyWordLength)
+void FBullCowGame::SetHiddenWord(int32 MyWordLength)
 {
 	TMap<int32, FString> WordChosenFromLength { {3, "cat"}, { 4, "frog" }, { 5, "shirt" }, {6, "planet"}};
 	MyHiddenWord = WordChosenFromLength[MyWordLength];
 
-	return WordChosenFromLength[MyWordLength];
 }
 
 bool FBullCowGame::IsIsogram(FString Word) const

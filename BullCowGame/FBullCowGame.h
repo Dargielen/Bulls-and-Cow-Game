@@ -1,6 +1,9 @@
+/* Class containing game components, header file */
+
 #pragma once
 #include <string>
 
+//to make syntax Unreal friendly
 using FString = std::string;
 using int32 = int;
 
@@ -28,11 +31,12 @@ public:
 	int32 GetMaxTries() const;
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
+	FString GetMyHiddenword() const;
 	bool IsGameWon() const;
 	EGuessStatus CheckGuessValidity(FString) const;
 	FBullCowCount SubmitValidGuess(FString);
 	void SetHiddenWord(int32);
-	void Reset(); //make a more rich return value
+	void Reset();
 	
 private:
 	int32 MyCurrentTry;

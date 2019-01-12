@@ -1,9 +1,14 @@
+/* Class containing game components, functions declarations */
+
+#pragma once
+
 #include "pch.h"
 #include "FBullCowGame.h"
 #include <map>
 #include <algorithm>
-#define TMap std::map
 
+//to make syntax Unreal friendly
+#define TMap std::map
 using FString = std::string;
 using int32 = int;
 
@@ -14,6 +19,11 @@ FBullCowGame::FBullCowGame()
 
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
+
+FString FBullCowGame::GetMyHiddenword() const
+{
+	return MyHiddenWord;
+}
 
 bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
@@ -60,7 +70,6 @@ bool FBullCowGame::IsLowercase(FString Word) const
 
 void FBullCowGame::Reset()
 {
-	//const FString HIDDEN_WORD = "ante";
 	MyCurrentTry = 1;
 	MyHiddenWord = "";
 	bGameIsWon = false;
